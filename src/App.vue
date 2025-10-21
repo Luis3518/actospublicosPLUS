@@ -10,6 +10,9 @@
       </div>
     </header>
 
+    <!-- Info Banner -->
+    <InfoBanner :fecha="dataFecha" :hora="dataHora" />
+
     <div class="main-container">
       <!-- Sidebar -->
       <aside class="sidebar">
@@ -68,15 +71,30 @@
 import { ref, computed } from 'vue'
 import ActoPublicoCard from './components/ActoPublicoCard.vue'
 import FilterPanel from './components/FilterPanel.vue'
+import InfoBanner from './components/InfoBanner.vue'
 import actosData from '../actos_publicos_todos_20251020_115648.json'
 
 export default {
   name: 'App',
   components: {
     ActoPublicoCard,
-    FilterPanel
+    FilterPanel,
+    InfoBanner
   },
   setup() {
+    // Extract date and time from JSON filename
+    // Filename format: actos_publicos_todos_20251020_115648.json
+    const jsonFilename = 'actos_publicos_todos_20251020_115648.json'
+    const dateTimeMatch = jsonFilename.match(/(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/)
+    
+    let dataFecha = ''
+    let dataHora = ''
+    
+    if (dateTimeMatch) {
+      const [_, year, month, day, hour, minute, second] = dateTimeMatch
+      dataFecha = `${day}/${month}/${year}`
+      dataHora = `${hour}:${minute}:${second}`
+    }
     const actosPublicos = ref(actosData.actos_publicos)
     const currentPage = ref(1)
     const itemsPerPage = 4
@@ -156,7 +174,9 @@ export default {
       handleFilterChange,
       clearFilters,
       nextPage,
-      previousPage
+      previousPage,
+      dataFecha,
+      dataHora
     }
   }
 }
