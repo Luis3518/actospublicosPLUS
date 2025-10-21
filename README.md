@@ -9,15 +9,20 @@ Esta aplicación web permite visualizar y filtrar los actos públicos disponible
 ## ✨ Características
 
 - 📊 **Visualización de Actos Públicos**: Tarjetas con información detallada de cada acto
+  - **Información visible**: estado, tipo de acto, fecha, escuela, distrito y turno
+  - **Información expandible**: horario detallado, causa y ID POF
 - 🔍 **Sistema de Filtros Dinámicos**: Los filtros se generan automáticamente desde los datos del JSON
   - Filtro por Área/Nivel (INICIAL, PRIMARIA, MEDIA, TECNICA, ARTISTICA, ESPECIAL, etc.)
   - Filtro por Cargo (todos los cargos disponibles en los datos)
   - Filtro por Especialidad (todas las especialidades disponibles)
   - Filtro por Escuela (lista desplegable con todas las escuelas/establecimientos disponibles)
+  - Filtro por Turno (MAÑANA, TARDE, NOCHE, VESPERTINO, etc.)
+  - Filtro por Distrito (todos los distritos escolares disponibles)
+  - Filtro por Causa (todas las causas de vacante disponibles)
 - 📄 **Paginación**: Muestra 4 actos por página para mejor navegación
 - 📱 **Diseño Responsivo**: Adaptable a diferentes tamaños de pantalla
 - 🎨 **Paleta de Colores Oficial**: Siguiendo los colores de la Ciudad de Buenos Aires
-- ⚡ **Detalles Expandibles**: Cada tarjeta puede expandirse para ver más información
+- ⚡ **Detalles Expandibles**: Cada tarjeta puede expandirse para ver más información adicional
 - 🔔 **Banner Informativo Modal**: Aviso importante que se muestra al iniciar la aplicación con información sobre la fuente de datos y su actualización
 - 🔄 **Carga Automática de Datos**: Detecta y usa automáticamente el archivo JSON más reciente disponible
 - ⚠️ **Manejo de Errores**: Banner de error informativo si no se encuentran archivos de datos
@@ -99,8 +104,12 @@ Tarjeta individual que muestra:
 - Título del cargo
 - Tags de nivel y tipo
 - Badge de estado
+- Tipo de acto
 - Fecha del acto público
-- Botón expandible para ver detalles adicionales
+- **Escuela (establecimiento)** - visible sin expandir
+- **Distrito** - visible sin expandir
+- **Turno** - visible sin expandir
+- Botón expandible para ver detalles adicionales (horario, causa, ID POF)
 - Link al acto público original
 
 ### FilterPanel.vue
@@ -109,6 +118,9 @@ Panel de filtros dinámicos que incluye:
 - **Filtro por Cargo**: Lista desplegable con todos los cargos únicos encontrados en los datos
 - **Filtro por Especialidad**: Lista desplegable con todas las especialidades únicas del JSON
 - **Filtro por Escuela**: Lista desplegable con todos los establecimientos/escuelas únicos del JSON
+- **Filtro por Turno**: Lista desplegable con todos los turnos únicos del JSON (MAÑANA, TARDE, NOCHE, VESPERTINO, etc.)
+- **Filtro por Distrito**: Lista desplegable con todos los distritos escolares únicos del JSON
+- **Filtro por Causa**: Lista desplegable con todas las causas de vacante únicas del JSON
 - Botón para limpiar todos los filtros
 - Los filtros se adaptan automáticamente a los datos cargados, sin necesidad de configuración manual
 - Todos los filtros muestran chips visuales cuando están activos
@@ -170,10 +182,10 @@ Los datos deben tener la siguiente estructura:
       "estado": "string",
       "fecha": "string",
       "link": "URL",
-      "establecimiento": "string",      // Nombre de la escuela - usado para búsqueda de Escuela
-      "distrito": "string",
-      "turno": "string",
-      "horario": "string",
+      "establecimiento": "string",      // Nombre de la escuela - mostrado como "Escuela" en el front, usado para filtro de Escuela
+      "distrito": "string",             // Distrito escolar - visible en la tarjeta
+      "turno": "string",                // Turno (MAÑANA, TARDE, etc.) - visible en la tarjeta
+      "horario": "string",              // Horario detallado - solo visible al expandir
       "causa": "string",
       "id_pof": "string"
     }
@@ -181,11 +193,12 @@ Los datos deben tener la siguiente estructura:
 }
 ```
 
-**Nota importante sobre los filtros**: La aplicación extrae automáticamente todos los valores únicos de los campos `nivel`, `titulo`, `especialidad_tag` y `establecimiento` para generar las opciones de los filtros. Esto significa que:
+**Nota importante sobre los filtros**: La aplicación extrae automáticamente todos los valores únicos de los campos `nivel`, `titulo`, `especialidad_tag`, `establecimiento`, `turno`, `distrito` y `causa` para generar las opciones de los filtros. Esto significa que:
 - No necesitas configurar manualmente los valores de los filtros
 - Los filtros siempre mostrarán exactamente las opciones disponibles en tus datos
-- Si agregas nuevos niveles, cargos, especialidades o escuelas en el JSON, aparecerán automáticamente en los filtros
-- El filtro de escuelas es una lista desplegable, lo que facilita la selección exacta del establecimiento deseado
+- Si agregas nuevos niveles, cargos, especialidades, escuelas, turnos, distritos o causas en el JSON, aparecerán automáticamente en los filtros
+- Todos los filtros son listas desplegables, lo que facilita la selección exacta de la opción deseada
+- Los filtros se pueden combinar para búsquedas más específicas (ej: PRIMARIA + MAÑANA + Distrito 4)
 
 ## 🔧 Actualización de Datos
 

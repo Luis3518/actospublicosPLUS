@@ -66,6 +66,9 @@
           :cargos="uniqueCargos"
           :especialidades="uniqueEspecialidades"
           :escuelas="uniqueEscuelas"
+          :turnos="uniqueTurnos"
+          :distritos="uniqueDistritos"
+          :causas="uniqueCausas"
           @filter-change="handleFilterChange"
           @clear-filters="clearFilters"
         />
@@ -153,7 +156,10 @@ export default {
       area: '',
       cargo: '',
       especialidad: '',
-      escuela: ''
+      escuela: '',
+      turno: '',
+      distrito: '',
+      causa: ''
     })
 
     // Extract unique values from JSON for filters
@@ -177,6 +183,21 @@ export default {
       return escuelas.sort()
     })
 
+    const uniqueTurnos = computed(() => {
+      const turnos = [...new Set(actosPublicos.value.map(acto => acto.turno).filter(Boolean))]
+      return turnos.sort()
+    })
+
+    const uniqueDistritos = computed(() => {
+      const distritos = [...new Set(actosPublicos.value.map(acto => acto.distrito).filter(Boolean))]
+      return distritos.sort()
+    })
+
+    const uniqueCausas = computed(() => {
+      const causas = [...new Set(actosPublicos.value.map(acto => acto.causa).filter(Boolean))]
+      return causas.sort()
+    })
+
     // Computed filtered actos
     const filteredActos = computed(() => {
       let filtered = actosPublicos.value
@@ -192,6 +213,15 @@ export default {
       }
       if (filters.value.escuela && filters.value.escuela !== 'Todos') {
         filtered = filtered.filter(acto => acto.establecimiento === filters.value.escuela)
+      }
+      if (filters.value.turno && filters.value.turno !== 'Todos') {
+        filtered = filtered.filter(acto => acto.turno === filters.value.turno)
+      }
+      if (filters.value.distrito && filters.value.distrito !== 'Todos') {
+        filtered = filtered.filter(acto => acto.distrito === filters.value.distrito)
+      }
+      if (filters.value.causa && filters.value.causa !== 'Todos') {
+        filtered = filtered.filter(acto => acto.causa === filters.value.causa)
       }
 
       return filtered
@@ -219,7 +249,10 @@ export default {
         area: '',
         cargo: '',
         especialidad: '',
-        escuela: ''
+        escuela: '',
+        turno: '',
+        distrito: '',
+        causa: ''
       }
       currentPage.value = 1
     }
@@ -252,7 +285,10 @@ export default {
       uniqueNiveles,
       uniqueCargos,
       uniqueEspecialidades,
-      uniqueEscuelas
+      uniqueEscuelas,
+      uniqueTurnos,
+      uniqueDistritos,
+      uniqueCausas
     }
   }
 }

@@ -28,18 +28,24 @@
         <span class="icon">📅</span>
         <span class="info-text">{{ acto.fecha }}</span>
       </div>
+
+      <div v-if="acto.establecimiento" class="info-item">
+        <span class="icon">🏫</span>
+        <span class="info-text"><strong>Escuela:</strong> {{ acto.establecimiento }}</span>
+      </div>
+
+      <div v-if="acto.distrito" class="info-item">
+        <span class="icon">📍</span>
+        <span class="info-text"><strong>Distrito:</strong> {{ acto.distrito }}</span>
+      </div>
+
+      <div v-if="acto.turno" class="info-item">
+        <span class="icon">🕐</span>
+        <span class="info-text"><strong>Turno:</strong> {{ acto.turno }}</span>
+      </div>
     </div>
 
     <div v-if="isExpanded" class="card-details">
-      <div v-if="acto.establecimiento" class="detail-row">
-        <strong>Establecimiento:</strong> {{ acto.establecimiento }}
-      </div>
-      <div v-if="acto.distrito" class="detail-row">
-        <strong>Distrito:</strong> {{ acto.distrito }}
-      </div>
-      <div v-if="acto.turno" class="detail-row">
-        <strong>Turno:</strong> {{ acto.turno }}
-      </div>
       <div v-if="acto.horario" class="detail-row">
         <strong>Horario:</strong> {{ acto.horario }}
       </div>

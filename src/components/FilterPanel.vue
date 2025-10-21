@@ -131,6 +131,99 @@
           <button class="chip-close" @click="clearFilter('escuela')">×</button>
         </div>
       </div>
+
+      <!-- Turno Filter -->
+      <div class="filter-group">
+        <label class="filter-label">
+          <span class="icon-search">🔍</span>
+          Turno
+        </label>
+        <div class="filter-input-wrapper">
+          <select 
+            class="filter-select"
+            :value="filters.turno"
+            @change="handleChange('turno', $event.target.value)"
+          >
+            <option value="">Todos</option>
+            <option v-for="turno in turnos" :key="turno" :value="turno">
+              {{ turno }}
+            </option>
+          </select>
+          <button 
+            v-if="filters.turno" 
+            class="btn-clear-filter"
+            @click="clearFilter('turno')"
+          >
+            ×
+          </button>
+        </div>
+        <div v-if="filters.turno" class="filter-chip">
+          {{ filters.turno }}
+          <button class="chip-close" @click="clearFilter('turno')">×</button>
+        </div>
+      </div>
+
+      <!-- Distrito Filter -->
+      <div class="filter-group">
+        <label class="filter-label">
+          <span class="icon-search">🔍</span>
+          Distrito
+        </label>
+        <div class="filter-input-wrapper">
+          <select 
+            class="filter-select"
+            :value="filters.distrito"
+            @change="handleChange('distrito', $event.target.value)"
+          >
+            <option value="">Todos</option>
+            <option v-for="distrito in distritos" :key="distrito" :value="distrito">
+              {{ distrito }}
+            </option>
+          </select>
+          <button 
+            v-if="filters.distrito" 
+            class="btn-clear-filter"
+            @click="clearFilter('distrito')"
+          >
+            ×
+          </button>
+        </div>
+        <div v-if="filters.distrito" class="filter-chip">
+          {{ filters.distrito }}
+          <button class="chip-close" @click="clearFilter('distrito')">×</button>
+        </div>
+      </div>
+
+      <!-- Causa Filter -->
+      <div class="filter-group">
+        <label class="filter-label">
+          <span class="icon-search">🔍</span>
+          Causa
+        </label>
+        <div class="filter-input-wrapper">
+          <select 
+            class="filter-select"
+            :value="filters.causa"
+            @change="handleChange('causa', $event.target.value)"
+          >
+            <option value="">Todos</option>
+            <option v-for="causa in causas" :key="causa" :value="causa">
+              {{ causa }}
+            </option>
+          </select>
+          <button 
+            v-if="filters.causa" 
+            class="btn-clear-filter"
+            @click="clearFilter('causa')"
+          >
+            ×
+          </button>
+        </div>
+        <div v-if="filters.causa" class="filter-chip">
+          {{ filters.causa }}
+          <button class="chip-close" @click="clearFilter('causa')">×</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -156,6 +249,18 @@ export default {
       default: () => []
     },
     escuelas: {
+      type: Array,
+      default: () => []
+    },
+    turnos: {
+      type: Array,
+      default: () => []
+    },
+    distritos: {
+      type: Array,
+      default: () => []
+    },
+    causas: {
       type: Array,
       default: () => []
     }
