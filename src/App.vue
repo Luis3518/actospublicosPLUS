@@ -1,5 +1,8 @@
 <template>
   <div class="app">
+    <!-- Error Banner -->
+    <ErrorBanner v-if="hasError" :errorMessage="errorMessage" />
+
     <!-- Header -->
     <header class="header">
       <div class="header-content">
@@ -11,7 +14,7 @@
     </header>
 
     <!-- Info Banner -->
-    <InfoBanner :fecha="dataFecha" :hora="dataHora" />
+    <InfoBanner v-if="!hasError" :fecha="dataFecha" :hora="dataHora" />
 
     <div class="main-container">
       <!-- Sidebar -->
@@ -72,19 +75,61 @@ import { ref, computed } from 'vue'
 import ActoPublicoCard from './components/ActoPublicoCard.vue'
 import FilterPanel from './components/FilterPanel.vue'
 import InfoBanner from './components/InfoBanner.vue'
-import actosData from '../actos_publicos_todos_20251020_115648.json'
+import ErrorBanner from './components/ErrorBanner.vue'
+
+// Import all JSON files automatically and get the most recent one
+const jsonModules = import.meta.glob('../actos_publicos_*.json', { eager: true })
+
+// Function to get the most recent JSON file
+function getMostRecentJson() {
+  const files = Object.keys(jsonModules)
+  
+  if (files.length === 0) {
+    throw new Error('No se encontraron archivos JSON de actos públicos')
+  }
+  
+  // Extract timestamps from filenames and sort
+  const sortedFiles = files.sort((a, b) => {
+    const timestampA = a.match(/(\d{8}_\d{6})/)?.[1] || ''
+    const timestampB = b.match(/(\d{8}_\d{6})/)?.[1] || ''
+    return timestampB.localeCompare(timestampA) // Most recent first
+  })
+  
+  const mostRecentFile = sortedFiles[0]
+  return {
+    data: jsonModules[mostRecentFile].default,
+    filename: mostRecentFile.split('/').pop()
+  }
+}
+
+// Try to load the most recent JSON, handle errors gracefully
+let actosData = null
+let jsonFilename = ''
+let loadError = null
+
+try {
+  const result = getMostRecentJson()
+  actosData = result.data
+  jsonFilename = result.filename
+} catch (error) {
+  loadError = error.message
+}
 
 export default {
   name: 'App',
   components: {
     ActoPublicoCard,
     FilterPanel,
-    InfoBanner
+    InfoBanner,
+    ErrorBanner
   },
   setup() {
+    // Check if there was an error loading the JSON
+    const hasError = ref(!!loadError)
+    const errorMessage = ref(loadError || '')
+
     // Extract date and time from JSON filename
     // Filename format: actos_publicos_todos_20251020_115648.json
-    const jsonFilename = 'actos_publicos_todos_20251020_115648.json'
     const dateTimeMatch = jsonFilename.match(/(\d{4})(\d{2})(\d{2})_(\d{2})(\d{2})(\d{2})/)
     
     let dataFecha = ''
@@ -95,7 +140,8 @@ export default {
       dataFecha = `${day}/${month}/${year}`
       dataHora = `${hour}:${minute}:${second}`
     }
-    const actosPublicos = ref(actosData.actos_publicos)
+    
+    const actosPublicos = ref(hasError.value ? [] : actosData.actos_publicos)
     const currentPage = ref(1)
     const itemsPerPage = 4
     
@@ -167,6 +213,8 @@ export default {
     }
 
     return {
+      hasError,
+      errorMessage,
       paginatedActos,
       filters,
       currentPage,

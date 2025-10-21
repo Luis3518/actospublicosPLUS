@@ -15,6 +15,8 @@ Esta aplicación web permite visualizar y filtrar los actos públicos disponible
 - 🎨 **Paleta de Colores Oficial**: Siguiendo los colores de la Ciudad de Buenos Aires
 - ⚡ **Detalles Expandibles**: Cada tarjeta puede expandirse para ver más información
 - 🔔 **Banner Informativo Modal**: Aviso importante que se muestra al iniciar la aplicación con información sobre la fuente de datos y su actualización
+- 🔄 **Carga Automática de Datos**: Detecta y usa automáticamente el archivo JSON más reciente disponible
+- ⚠️ **Manejo de Errores**: Banner de error informativo si no se encuentran archivos de datos
 
 ## 🎨 Paleta de Colores
 
@@ -40,12 +42,16 @@ Esta aplicación web permite visualizar y filtrar los actos públicos disponible
 npm install
 ```
 
-3. Inicia el servidor de desarrollo:
+3. **Importante**: Asegúrate de tener al menos un archivo JSON con datos de actos públicos en la raíz del proyecto. El archivo debe seguir el formato:
+   - `actos_publicos_YYYYMMDD_HHMMSS.json`
+   - Ejemplo: `actos_publicos_20251021_185353.json`
+
+4. Inicia el servidor de desarrollo:
 ```bash
 npm run dev
 ```
 
-4. Abre tu navegador en `http://localhost:3000`
+5. Abre tu navegador en `http://localhost:5173` (o el puerto que indique Vite)
 
 ## 📦 Scripts Disponibles
 
@@ -61,11 +67,13 @@ actospublicosPLUS/
 │   ├── components/
 │   │   ├── ActoPublicoCard.vue    # Componente de tarjeta individual
 │   │   ├── FilterPanel.vue        # Panel de filtros
-│   │   └── InfoBanner.vue         # Banner informativo modal
+│   │   ├── InfoBanner.vue         # Banner informativo modal
+│   │   └── ErrorBanner.vue        # Banner de error
 │   ├── App.vue                     # Componente principal
 │   ├── main.js                     # Punto de entrada
 │   └── style.css                   # Estilos globales
-├── actos_publicos_todos_20251020_115648.json  # Datos de ejemplo
+├── actos_publicos_*.json           # Archivos de datos (ignorados por git)
+├── .gitignore                      # Archivos ignorados por git
 ├── index.html                      # HTML principal
 ├── package.json                    # Dependencias del proyecto
 ├── vite.config.js                  # Configuración de Vite
@@ -109,9 +117,35 @@ Banner informativo modal que:
 - Requiere que el usuario acepte antes de continuar
 - Diseño modal con overlay y animaciones
 
+### ErrorBanner.vue
+Banner de error que:
+- Se muestra cuando no se encuentran archivos JSON de datos
+- Diseño en rojo con animación de advertencia
+- Proporciona instrucciones sobre el formato de archivo esperado
+- Bloquea la interfaz hasta que se solucione el problema
+- Muestra mensaje de error técnico detallado
+
 ## 📊 Formato de Datos
 
-Los datos se cargan desde el archivo JSON `actos_publicos_todos_20251020_115648.json` con la siguiente estructura:
+### Carga Automática de Archivos JSON
+
+La aplicación utiliza un sistema de carga automática que:
+- Detecta todos los archivos JSON que coincidan con el patrón `actos_publicos_*.json` en la raíz del proyecto
+- Ordena los archivos por timestamp (fecha y hora en el nombre del archivo)
+- **Carga automáticamente el archivo más reciente** sin necesidad de modificar el código
+- Muestra un banner de error si no encuentra ningún archivo
+
+### Nomenclatura de Archivos
+
+Los archivos JSON deben seguir este formato de nombre:
+- **Patrón**: `actos_publicos_YYYYMMDD_HHMMSS.json`
+- **Ejemplo**: `actos_publicos_20251021_185353.json`
+  - `20251021` = 21 de octubre de 2025
+  - `185353` = 18:53:53
+
+### Estructura del JSON
+
+Los datos deben tener la siguiente estructura:
 
 ```json
 {
@@ -141,9 +175,20 @@ Los datos se cargan desde el archivo JSON `actos_publicos_todos_20251020_115648.
 }
 ```
 
-## 🔧 Personalización
+## 🔧 Actualización de Datos
 
-Para agregar nuevos actos públicos, simplemente actualiza el archivo JSON `actos_publicos_todos_20251020_115648.json` con el formato especificado.
+### Para agregar nuevos actos públicos:
+
+1. Crea un nuevo archivo JSON en la raíz del proyecto siguiendo el formato de nombre: `actos_publicos_YYYYMMDD_HHMMSS.json`
+2. Asegúrate de que el contenido siga la estructura especificada en la sección "Formato de Datos"
+3. La aplicación detectará automáticamente el archivo más reciente y lo usará
+4. No es necesario modificar ningún código fuente
+
+### Gestión de Archivos
+
+- Los archivos JSON están incluidos en `.gitignore` para evitar subir datos sensibles al repositorio
+- Puedes mantener múltiples archivos JSON para histórico
+- La aplicación siempre usará el más reciente basándose en el timestamp del nombre
 
 ## 🛠️ Tecnologías Utilizadas
 
@@ -171,6 +216,16 @@ Para contribuir al proyecto:
 2. Asegúrate de seguir la paleta de colores oficial
 3. Mantén la estructura de componentes organizada
 4. Prueba en diferentes tamaños de pantalla
+5. No incluyas archivos JSON de datos en tus commits (están en `.gitignore`)
+
+## ⚠️ Solución de Problemas
+
+### "Error al Obtener la Información"
+Si ves este banner de error al iniciar la aplicación:
+- Verifica que existe al menos un archivo JSON en la raíz del proyecto
+- Asegúrate de que el nombre del archivo siga el formato: `actos_publicos_YYYYMMDD_HHMMSS.json`
+- Verifica que el archivo JSON tenga la estructura correcta y sea válido
+- Revisa la consola del navegador para más detalles del error
 
 ## 📧 Contacto
 
