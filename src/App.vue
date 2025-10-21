@@ -181,3 +181,89 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+/* Estilos adicionales para mejorar el header */
+.header {
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(58, 166, 118, 0.2);
+}
+
+.btn-login {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.3px;
+}
+
+.btn-login::before {
+  content: "👤";
+  font-size: 16px;
+}
+
+/* Mejoras para botones de paginación */
+.pagination {
+  margin-top: 2rem;
+}
+
+.pagination-btn {
+  min-width: 120px;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pagination-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.pagination-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.pagination-info {
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fdfb 100%);
+  border-radius: 8px;
+  border: 2px solid #e0f2ea;
+  box-shadow: 0 2px 8px rgba(86, 197, 150, 0.1);
+}
+
+/* Animaciones suaves */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.cards-grid {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.filter-panel {
+  animation: fadeInUp 1s ease-out;
+}
+</style>

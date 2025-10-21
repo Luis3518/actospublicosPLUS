@@ -96,15 +96,19 @@ export default {
 
 <style scoped>
 .acto-card {
-  background: #F5F5F5;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fdfb 100%);
+  border-radius: 12px;
   padding: 20px;
   position: relative;
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s ease;
+  border: 2px solid #e0f2ea;
+  box-shadow: 0 2px 8px rgba(86, 197, 150, 0.1);
 }
 
 .acto-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(86, 197, 150, 0.2);
+  transform: translateY(-4px);
+  border-color: #56c596;
 }
 
 .card-header {
@@ -115,32 +119,33 @@ export default {
 }
 
 .expand-btn {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 24px;
-  height: 24px;
+  background: linear-gradient(135deg, #a8e6cf 0%, #56c596 100%);
+  border: none;
+  border-radius: 8px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   font-size: 18px;
   line-height: 1;
-  color: #1F3A4F;
+  color: #fff;
   padding: 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(86, 197, 150, 0.2);
 }
 
 .expand-btn:hover {
-  background: #FDB913;
-  border-color: #FDB913;
-  color: #fff;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(86, 197, 150, 0.3);
 }
 
 .card-title {
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: #1F3A4F;
+  color: #1a4d2e;
   flex: 1;
 }
 
@@ -160,23 +165,28 @@ export default {
 }
 
 .tag-nivel {
-  background: #00B4D8;
+  background: linear-gradient(135deg, #56c596 0%, #3aa676 100%);
+  box-shadow: 0 2px 6px rgba(86, 197, 150, 0.2);
 }
 
 .tag-nivel.tag-inicial {
-  background: #F55555;
+  background: linear-gradient(135deg, #f093a6 0%, #e75874 100%);
+  box-shadow: 0 2px 6px rgba(231, 88, 116, 0.2);
 }
 
 .tag-nivel.tag-primaria {
-  background: #00B4D8;
+  background: linear-gradient(135deg, #6ba5d6 0%, #4a89c7 100%);
+  box-shadow: 0 2px 6px rgba(74, 137, 199, 0.2);
 }
 
 .tag-nivel.tag-otros {
-  background: #1F3A4F;
+  background: linear-gradient(135deg, #7c8b9a 0%, #5d6d7e 100%);
+  box-shadow: 0 2px 6px rgba(93, 109, 126, 0.2);
 }
 
 .tag-tipo {
-  background: #00B4D8;
+  background: linear-gradient(135deg, #a8e6cf 0%, #56c596 100%);
+  box-shadow: 0 2px 6px rgba(86, 197, 150, 0.2);
 }
 
 .card-info {
@@ -191,12 +201,13 @@ export default {
 }
 
 .badge-estado {
-  background: #FDB913;
-  color: #1F3A4F;
-  padding: 4px 12px;
-  border-radius: 4px;
+  background: linear-gradient(135deg, #ffd89b 0%, #ffb74d 100%);
+  color: #1a4d2e;
+  padding: 6px 14px;
+  border-radius: 8px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(255, 183, 77, 0.3);
 }
 
 .icon {
@@ -205,20 +216,21 @@ export default {
 
 .info-text {
   font-size: 14px;
-  color: #1F3A4F;
+  color: #1a4d2e;
 }
 
 .card-details {
-  background: #fff;
-  border-radius: 6px;
+  background: linear-gradient(135deg, #f0f9f4 0%, #e8f5ed 100%);
+  border-radius: 10px;
   padding: 16px;
   margin-bottom: 16px;
+  border: 1px solid #d4ebe0;
 }
 
 .detail-row {
   margin-bottom: 8px;
   font-size: 14px;
-  color: #1F3A4F;
+  color: #1a4d2e;
 }
 
 .detail-row:last-child {
@@ -236,13 +248,15 @@ export default {
 }
 
 .link-detail {
-  color: #00B4D8;
+  color: #3aa676;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
+  transition: all 0.3s ease;
 }
 
 .link-detail:hover {
+  color: #2d7a5b;
   text-decoration: underline;
 }
 </style>

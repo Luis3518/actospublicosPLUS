@@ -183,10 +183,11 @@ export default {
 
 <style scoped>
 .filter-panel-container {
-  background: #fff;
-  border-radius: 8px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fdfb 100%);
+  border-radius: 12px;
   padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 16px rgba(86, 197, 150, 0.15);
+  border: 2px solid #e0f2ea;
 }
 
 .filter-header {
@@ -194,29 +195,38 @@ export default {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #e0f2ea;
 }
 
 .filter-title {
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: #1F3A4F;
+  color: #1a4d2e;
+  background: linear-gradient(135deg, #2d7a5b 0%, #1a4d2e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .btn-clear-all {
-  background: #e0e0e0;
-  border: none;
-  border-radius: 4px;
+  background: linear-gradient(135deg, #f0f9f4 0%, #e0f2ea 100%);
+  border: 1px solid #56c596;
+  border-radius: 8px;
   padding: 6px 12px;
   font-size: 12px;
-  font-weight: 500;
-  color: #666;
+  font-weight: 600;
+  color: #2d7a5b;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
 }
 
 .btn-clear-all:hover {
-  background: #d0d0d0;
+  background: linear-gradient(135deg, #56c596 0%, #3aa676 100%);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(86, 197, 150, 0.3);
 }
 
 .filters-list {
@@ -237,7 +247,7 @@ export default {
   gap: 6px;
   font-size: 14px;
   font-weight: 600;
-  color: #1F3A4F;
+  color: #1a4d2e;
 }
 
 .icon-search {
@@ -254,12 +264,13 @@ export default {
 .filter-input {
   width: 100%;
   padding: 10px 32px 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 2px solid #d4ebe0;
+  border-radius: 8px;
   font-size: 14px;
-  color: #1F3A4F;
-  background: #fff;
+  color: #1a4d2e;
+  background: #ffffff;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .filter-input {
@@ -269,7 +280,8 @@ export default {
 .filter-select:focus,
 .filter-input:focus {
   outline: none;
-  border-color: #00B4D8;
+  border-color: #56c596;
+  box-shadow: 0 0 0 3px rgba(86, 197, 150, 0.1);
 }
 
 .btn-clear-filter {
@@ -278,50 +290,57 @@ export default {
   background: none;
   border: none;
   font-size: 20px;
-  color: #999;
+  color: #56c596;
   cursor: pointer;
   padding: 0;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
+  transition: all 0.3s ease;
+  border-radius: 50%;
 }
 
 .btn-clear-filter:hover {
-  color: #666;
+  color: #3aa676;
+  background: rgba(86, 197, 150, 0.1);
 }
 
 .filter-chip {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #00B4D8;
+  background: linear-gradient(135deg, #56c596 0%, #3aa676 100%);
   color: #fff;
   padding: 6px 12px;
-  border-radius: 16px;
+  border-radius: 20px;
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 600;
   max-width: fit-content;
+  box-shadow: 0 2px 6px rgba(86, 197, 150, 0.3);
 }
 
 .chip-close {
-  background: none;
+  background: rgba(255, 255, 255, 0.2);
   border: none;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
   padding: 0;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
   line-height: 1;
+  border-radius: 50%;
+  transition: all 0.3s ease;
 }
 
 .chip-close:hover {
-  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
 }
 </style>
