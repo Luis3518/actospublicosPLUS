@@ -108,13 +108,16 @@
           Escuela
         </label>
         <div class="filter-input-wrapper">
-          <input 
-            type="text"
-            class="filter-input"
-            placeholder="Buscar escuela..."
+          <select 
+            class="filter-select"
             :value="filters.escuela"
-            @input="handleChange('escuela', $event.target.value)"
+            @change="handleChange('escuela', $event.target.value)"
           >
+            <option value="">Todos</option>
+            <option v-for="escuela in escuelas" :key="escuela" :value="escuela">
+              {{ escuela }}
+            </option>
+          </select>
           <button 
             v-if="filters.escuela" 
             class="btn-clear-filter"
@@ -149,6 +152,10 @@ export default {
       default: () => []
     },
     especialidades: {
+      type: Array,
+      default: () => []
+    },
+    escuelas: {
       type: Array,
       default: () => []
     }

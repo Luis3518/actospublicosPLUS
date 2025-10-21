@@ -65,6 +65,7 @@
           :niveles="uniqueNiveles"
           :cargos="uniqueCargos"
           :especialidades="uniqueEspecialidades"
+          :escuelas="uniqueEscuelas"
           @filter-change="handleFilterChange"
           @clear-filters="clearFilters"
         />
@@ -171,6 +172,11 @@ export default {
       return especialidades.sort()
     })
 
+    const uniqueEscuelas = computed(() => {
+      const escuelas = [...new Set(actosPublicos.value.map(acto => acto.establecimiento).filter(Boolean))]
+      return escuelas.sort()
+    })
+
     // Computed filtered actos
     const filteredActos = computed(() => {
       let filtered = actosPublicos.value
@@ -185,9 +191,7 @@ export default {
         filtered = filtered.filter(acto => acto.especialidad_tag === filters.value.especialidad)
       }
       if (filters.value.escuela && filters.value.escuela !== 'Todos') {
-        filtered = filtered.filter(acto => 
-          acto.establecimiento.toLowerCase().includes(filters.value.escuela.toLowerCase())
-        )
+        filtered = filtered.filter(acto => acto.establecimiento === filters.value.escuela)
       }
 
       return filtered
@@ -247,7 +251,8 @@ export default {
       dataHora,
       uniqueNiveles,
       uniqueCargos,
-      uniqueEspecialidades
+      uniqueEspecialidades,
+      uniqueEscuelas
     }
   }
 }

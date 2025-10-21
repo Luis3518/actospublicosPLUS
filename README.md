@@ -13,7 +13,7 @@ Esta aplicación web permite visualizar y filtrar los actos públicos disponible
   - Filtro por Área/Nivel (INICIAL, PRIMARIA, MEDIA, TECNICA, ARTISTICA, ESPECIAL, etc.)
   - Filtro por Cargo (todos los cargos disponibles en los datos)
   - Filtro por Especialidad (todas las especialidades disponibles)
-  - Búsqueda por Escuela (búsqueda de texto libre)
+  - Filtro por Escuela (lista desplegable con todas las escuelas/establecimientos disponibles)
 - 📄 **Paginación**: Muestra 4 actos por página para mejor navegación
 - 📱 **Diseño Responsivo**: Adaptable a diferentes tamaños de pantalla
 - 🎨 **Paleta de Colores Oficial**: Siguiendo los colores de la Ciudad de Buenos Aires
@@ -108,9 +108,10 @@ Panel de filtros dinámicos que incluye:
 - **Filtro por Área/Nivel**: Se genera automáticamente con todos los niveles presentes en el JSON (INICIAL, PRIMARIA, MEDIA, TECNICA, ARTISTICA, ESPECIAL, etc.)
 - **Filtro por Cargo**: Lista desplegable con todos los cargos únicos encontrados en los datos
 - **Filtro por Especialidad**: Lista desplegable con todas las especialidades únicas del JSON
-- **Búsqueda por Escuela**: Campo de texto para filtrar por nombre de establecimiento
+- **Filtro por Escuela**: Lista desplegable con todos los establecimientos/escuelas únicos del JSON
 - Botón para limpiar todos los filtros
 - Los filtros se adaptan automáticamente a los datos cargados, sin necesidad de configuración manual
+- Todos los filtros muestran chips visuales cuando están activos
 
 ### InfoBanner.vue
 Banner informativo modal que:
@@ -180,10 +181,11 @@ Los datos deben tener la siguiente estructura:
 }
 ```
 
-**Nota importante sobre los filtros**: La aplicación extrae automáticamente todos los valores únicos de los campos `nivel`, `titulo` y `especialidad_tag` para generar las opciones de los filtros. Esto significa que:
+**Nota importante sobre los filtros**: La aplicación extrae automáticamente todos los valores únicos de los campos `nivel`, `titulo`, `especialidad_tag` y `establecimiento` para generar las opciones de los filtros. Esto significa que:
 - No necesitas configurar manualmente los valores de los filtros
 - Los filtros siempre mostrarán exactamente las opciones disponibles en tus datos
-- Si agregas nuevos niveles, cargos o especialidades en el JSON, aparecerán automáticamente en los filtros
+- Si agregas nuevos niveles, cargos, especialidades o escuelas en el JSON, aparecerán automáticamente en los filtros
+- El filtro de escuelas es una lista desplegable, lo que facilita la selección exacta del establecimiento deseado
 
 ## 🔧 Actualización de Datos
 
