@@ -14,6 +14,7 @@ Esta aplicación web permite visualizar y filtrar los actos públicos disponible
 - 📱 **Diseño Responsivo**: Adaptable a diferentes tamaños de pantalla
 - 🎨 **Paleta de Colores Oficial**: Siguiendo los colores de la Ciudad de Buenos Aires
 - ⚡ **Detalles Expandibles**: Cada tarjeta puede expandirse para ver más información
+- 🔔 **Banner Informativo Modal**: Aviso importante que se muestra al iniciar la aplicación con información sobre la fuente de datos y su actualización
 
 ## 🎨 Paleta de Colores
 
@@ -59,7 +60,8 @@ actospublicosPLUS/
 ├── src/
 │   ├── components/
 │   │   ├── ActoPublicoCard.vue    # Componente de tarjeta individual
-│   │   └── FilterPanel.vue         # Panel de filtros
+│   │   ├── FilterPanel.vue        # Panel de filtros
+│   │   └── InfoBanner.vue         # Banner informativo modal
 │   ├── App.vue                     # Componente principal
 │   ├── main.js                     # Punto de entrada
 │   └── style.css                   # Estilos globales
@@ -97,6 +99,15 @@ Panel de filtros que incluye:
 - Filtro por Especialidad
 - Búsqueda por Escuela
 - Botón para limpiar todos los filtros
+
+### InfoBanner.vue
+Banner informativo modal que:
+- Se muestra al iniciar la aplicación bloqueando el contenido
+- Informa sobre la fecha y hora de extracción de los datos
+- Incluye disclaimers legales sobre el uso de la información
+- Proporciona enlace al sistema oficial de actos públicos
+- Requiere que el usuario acepte antes de continuar
+- Diseño modal con overlay y animaciones
 
 ## 📊 Formato de Datos
 
