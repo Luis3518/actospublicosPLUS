@@ -9,7 +9,11 @@ Esta aplicación web permite visualizar y filtrar los actos públicos disponible
 ## ✨ Características
 
 - 📊 **Visualización de Actos Públicos**: Tarjetas con información detallada de cada acto
-- 🔍 **Sistema de Filtros**: Filtro por área, cargo, asignatura, especialidad y escuela
+- 🔍 **Sistema de Filtros Dinámicos**: Los filtros se generan automáticamente desde los datos del JSON
+  - Filtro por Área/Nivel (INICIAL, PRIMARIA, MEDIA, TECNICA, ARTISTICA, ESPECIAL, etc.)
+  - Filtro por Cargo (todos los cargos disponibles en los datos)
+  - Filtro por Especialidad (todas las especialidades disponibles)
+  - Búsqueda por Escuela (búsqueda de texto libre)
 - 📄 **Paginación**: Muestra 4 actos por página para mejor navegación
 - 📱 **Diseño Responsivo**: Adaptable a diferentes tamaños de pantalla
 - 🎨 **Paleta de Colores Oficial**: Siguiendo los colores de la Ciudad de Buenos Aires
@@ -100,13 +104,13 @@ Tarjeta individual que muestra:
 - Link al acto público original
 
 ### FilterPanel.vue
-Panel de filtros que incluye:
-- Filtro por Área (INICIAL, PRIMARIA, PROGRAMAS SOCIOEDUCATIVOS)
-- Filtro por Cargo
-- Filtro por Asignatura
-- Filtro por Especialidad
-- Búsqueda por Escuela
+Panel de filtros dinámicos que incluye:
+- **Filtro por Área/Nivel**: Se genera automáticamente con todos los niveles presentes en el JSON (INICIAL, PRIMARIA, MEDIA, TECNICA, ARTISTICA, ESPECIAL, etc.)
+- **Filtro por Cargo**: Lista desplegable con todos los cargos únicos encontrados en los datos
+- **Filtro por Especialidad**: Lista desplegable con todas las especialidades únicas del JSON
+- **Búsqueda por Escuela**: Campo de texto para filtrar por nombre de establecimiento
 - Botón para limpiar todos los filtros
+- Los filtros se adaptan automáticamente a los datos cargados, sin necesidad de configuración manual
 
 ### InfoBanner.vue
 Banner informativo modal que:
@@ -158,13 +162,14 @@ Los datos deben tener la siguiente estructura:
   },
   "actos_publicos": [
     {
-      "titulo": "string",
-      "nivel": "string",
+      "titulo": "string",               // Nombre del cargo - usado para filtro de Cargos
+      "nivel": "string",                // Nivel educativo - usado para filtro de Área
       "tipo": "string",
+      "especialidad_tag": "string",     // Especialidad - usado para filtro de Especialidad
       "estado": "string",
       "fecha": "string",
       "link": "URL",
-      "establecimiento": "string",
+      "establecimiento": "string",      // Nombre de la escuela - usado para búsqueda de Escuela
       "distrito": "string",
       "turno": "string",
       "horario": "string",
@@ -174,6 +179,11 @@ Los datos deben tener la siguiente estructura:
   ]
 }
 ```
+
+**Nota importante sobre los filtros**: La aplicación extrae automáticamente todos los valores únicos de los campos `nivel`, `titulo` y `especialidad_tag` para generar las opciones de los filtros. Esto significa que:
+- No necesitas configurar manualmente los valores de los filtros
+- Los filtros siempre mostrarán exactamente las opciones disponibles en tus datos
+- Si agregas nuevos niveles, cargos o especialidades en el JSON, aparecerán automáticamente en los filtros
 
 ## 🔧 Actualización de Datos
 

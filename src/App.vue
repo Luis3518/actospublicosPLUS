@@ -62,6 +62,9 @@
       <aside class="filter-panel">
         <FilterPanel 
           :filters="filters"
+          :niveles="uniqueNiveles"
+          :cargos="uniqueCargos"
+          :especialidades="uniqueEspecialidades"
           @filter-change="handleFilterChange"
           @clear-filters="clearFilters"
         />
@@ -148,9 +151,24 @@ export default {
     const filters = ref({
       area: '',
       cargo: '',
-      asignatura: '',
       especialidad: '',
       escuela: ''
+    })
+
+    // Extract unique values from JSON for filters
+    const uniqueNiveles = computed(() => {
+      const niveles = [...new Set(actosPublicos.value.map(acto => acto.nivel).filter(Boolean))]
+      return niveles.sort()
+    })
+
+    const uniqueCargos = computed(() => {
+      const cargos = [...new Set(actosPublicos.value.map(acto => acto.titulo).filter(Boolean))]
+      return cargos.sort()
+    })
+
+    const uniqueEspecialidades = computed(() => {
+      const especialidades = [...new Set(actosPublicos.value.map(acto => acto.especialidad_tag).filter(Boolean))]
+      return especialidades.sort()
     })
 
     // Computed filtered actos
@@ -162,6 +180,9 @@ export default {
       }
       if (filters.value.cargo && filters.value.cargo !== 'Todos') {
         filtered = filtered.filter(acto => acto.titulo === filters.value.cargo)
+      }
+      if (filters.value.especialidad && filters.value.especialidad !== 'Todos') {
+        filtered = filtered.filter(acto => acto.especialidad_tag === filters.value.especialidad)
       }
       if (filters.value.escuela && filters.value.escuela !== 'Todos') {
         filtered = filtered.filter(acto => 
@@ -193,7 +214,6 @@ export default {
       filters.value = {
         area: '',
         cargo: '',
-        asignatura: '',
         especialidad: '',
         escuela: ''
       }
@@ -224,7 +244,10 @@ export default {
       nextPage,
       previousPage,
       dataFecha,
-      dataHora
+      dataHora,
+      uniqueNiveles,
+      uniqueCargos,
+      uniqueEspecialidades
     }
   }
 }

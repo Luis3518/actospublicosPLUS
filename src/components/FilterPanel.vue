@@ -21,9 +21,9 @@
             @change="handleChange('area', $event.target.value)"
           >
             <option value="">Todos</option>
-            <option value="INICIAL">INICIAL</option>
-            <option value="PRIMARIA">PRIMARIA</option>
-            <option value="PROGRAMAS SOCIOEDUCATIVOS">PROGRAMAS SOCIOEDUCATIVOS</option>
+            <option v-for="nivel in niveles" :key="nivel" :value="nivel">
+              {{ nivel }}
+            </option>
           </select>
           <button 
             v-if="filters.area" 
@@ -52,9 +52,9 @@
             @change="handleChange('cargo', $event.target.value)"
           >
             <option value="">Todos</option>
-            <option value="MAESTRO DE SECCION">MAESTRO DE SECCION</option>
-            <option value="DIRECTOR DE EDUCACIÓN PRIMARIA">DIRECTOR DE EDUCACIÓN PRIMARIA</option>
-            <option value="SUPERVISOR ADJUNTO DE INICIAL">SUPERVISOR ADJUNTO DE INICIAL</option>
+            <option v-for="cargo in cargos" :key="cargo" :value="cargo">
+              {{ cargo }}
+            </option>
           </select>
           <button 
             v-if="filters.cargo" 
@@ -67,30 +67,6 @@
         <div v-if="filters.cargo" class="filter-chip">
           {{ filters.cargo }}
           <button class="chip-close" @click="clearFilter('cargo')">×</button>
-        </div>
-      </div>
-
-      <!-- Asignatura Filter -->
-      <div class="filter-group">
-        <label class="filter-label">
-          <span class="icon-search">🔍</span>
-          Asignatura
-        </label>
-        <div class="filter-input-wrapper">
-          <select 
-            class="filter-select"
-            :value="filters.asignatura"
-            @change="handleChange('asignatura', $event.target.value)"
-          >
-            <option value="">Todos</option>
-          </select>
-          <button 
-            v-if="filters.asignatura" 
-            class="btn-clear-filter"
-            @click="clearFilter('asignatura')"
-          >
-            ×
-          </button>
         </div>
       </div>
 
@@ -107,6 +83,9 @@
             @change="handleChange('especialidad', $event.target.value)"
           >
             <option value="">Todos</option>
+            <option v-for="especialidad in especialidades" :key="especialidad" :value="especialidad">
+              {{ especialidad }}
+            </option>
           </select>
           <button 
             v-if="filters.especialidad" 
@@ -115,6 +94,10 @@
           >
             ×
           </button>
+        </div>
+        <div v-if="filters.especialidad" class="filter-chip">
+          {{ filters.especialidad }}
+          <button class="chip-close" @click="clearFilter('especialidad')">×</button>
         </div>
       </div>
 
@@ -156,6 +139,18 @@ export default {
     filters: {
       type: Object,
       required: true
+    },
+    niveles: {
+      type: Array,
+      default: () => []
+    },
+    cargos: {
+      type: Array,
+      default: () => []
+    },
+    especialidades: {
+      type: Array,
+      default: () => []
     }
   },
   emits: ['filter-change', 'clear-filters'],
