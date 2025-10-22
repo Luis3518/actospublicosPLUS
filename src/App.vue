@@ -9,7 +9,6 @@
         <div class="header-left">
           <div class="logo">Actos Públicos PLUS</div>
         </div>
-        <button class="btn-login">test@bue.edu.ar</button>
       </div>
     </header>
 
@@ -17,10 +16,6 @@
     <InfoBanner v-if="!hasError" :fecha="dataFecha" :hora="dataHora" />
 
     <div class="main-container">
-      <!-- Sidebar -->
-      <aside class="sidebar">
-      </aside>
-
       <!-- Main Content -->
       <main class="content">
         <div class="content-header">
@@ -303,18 +298,6 @@ export default {
 .logo {
   letter-spacing: 0.5px;
   text-shadow: 0 2px 4px rgba(58, 166, 118, 0.2);
-}
-
-.btn-login {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  letter-spacing: 0.3px;
-}
-
-.btn-login::before {
-  content: "👤";
-  font-size: 16px;
 }
 
 /* Mejoras para botones de paginación */
