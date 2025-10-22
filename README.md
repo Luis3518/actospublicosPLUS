@@ -175,6 +175,7 @@ Los datos deben tener la siguiente estructura:
   },
   "actos_publicos": [
     {
+      "id": number,                     // Identificador único del acto - usado como key en arrays de Vue
       "titulo": "string",               // Nombre del cargo - usado para filtro de Cargos
       "nivel": "string",                // Nivel educativo - usado para filtro de Área
       "tipo": "string",
@@ -192,6 +193,8 @@ Los datos deben tener la siguiente estructura:
   ]
 }
 ```
+
+**Nota importante sobre el campo `id`**: El campo `id` es un identificador único numérico para cada acto público que se utiliza internamente por Vue para la manipulación eficiente de arrays (especialmente al aplicar filtros y paginación). Esto mejora el rendimiento de la aplicación y evita problemas con claves duplicadas.
 
 **Nota importante sobre los filtros**: La aplicación extrae automáticamente todos los valores únicos de los campos `nivel`, `titulo`, `especialidad_tag`, `establecimiento`, `turno`, `distrito` y `causa` para generar las opciones de los filtros. Esto significa que:
 - No necesitas configurar manualmente los valores de los filtros

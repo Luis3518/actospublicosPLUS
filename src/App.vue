@@ -31,7 +31,7 @@
         <div class="cards-grid">
           <ActoPublicoCard
             v-for="acto in paginatedActos"
-            :key="acto.link"
+            :key="acto.id"
             :acto="acto"
           />
         </div>
