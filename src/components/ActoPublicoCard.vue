@@ -13,10 +13,6 @@
 
     <div class="card-info">
       <div class="info-item">
-        <span class="badge-estado">{{ acto.estado }}</span>
-      </div>
-
-      <div class="info-item">
         <span class="icon">📋</span>
         <span class="info-text">{{ acto.tipo_acto }}</span>
       </div>
@@ -40,17 +36,20 @@
         <span class="icon">🕐</span>
         <span class="info-text"><strong>Turno:</strong> {{ acto.turno }}</span>
       </div>
-    </div>
 
-    <div class="card-details">
-      <div v-if="acto.horario" class="detail-row">
-        <strong>Horario:</strong> {{ acto.horario }}
+      <div v-if="acto.horario" class="info-item">
+        <span class="icon">⏰</span>
+        <span class="info-text"><strong>Horario:</strong> {{ acto.horario }}</span>
       </div>
-      <div v-if="acto.causa" class="detail-row">
-        <strong>Causa:</strong> {{ acto.causa }}
+
+      <div v-if="acto.causa" class="info-item">
+        <span class="icon">📝</span>
+        <span class="info-text"><strong>Causa:</strong> {{ acto.causa }}</span>
       </div>
-      <div v-if="acto.id_pof" class="detail-row">
-        <strong>ID POF:</strong> {{ acto.id_pof }}
+
+      <div v-if="acto.id_pof" class="info-item">
+        <span class="icon">🆔</span>
+        <span class="info-text"><strong>ID POF:</strong> {{ acto.id_pof }}</span>
       </div>
     </div>
 
@@ -166,16 +165,6 @@ export default {
   margin-bottom: 8px;
 }
 
-.badge-estado {
-  background: linear-gradient(135deg, #ffd89b 0%, #ffb74d 100%);
-  color: #1a4d2e;
-  padding: 6px 14px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 700;
-  box-shadow: 0 2px 6px rgba(255, 183, 77, 0.3);
-}
-
 .icon {
   font-size: 16px;
 }
@@ -183,29 +172,6 @@ export default {
 .info-text {
   font-size: 14px;
   color: #1a4d2e;
-}
-
-.card-details {
-  background: linear-gradient(135deg, #f0f9f4 0%, #e8f5ed 100%);
-  border-radius: 10px;
-  padding: 16px;
-  margin-bottom: 16px;
-  border: 1px solid #d4ebe0;
-}
-
-.detail-row {
-  margin-bottom: 8px;
-  font-size: 14px;
-  color: #1a4d2e;
-}
-
-.detail-row:last-child {
-  margin-bottom: 0;
-}
-
-.detail-row strong {
-  font-weight: 600;
-  margin-right: 8px;
 }
 
 .card-footer {
