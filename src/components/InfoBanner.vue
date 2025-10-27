@@ -12,9 +12,6 @@
             <a href="https://actopublico.bue.edu.ar/" target="_blank" rel="noopener noreferrer" class="official-link">sistema oficial de actos públicos</a>.
           </p>
           <p>
-            La información puede modificarse sin previo aviso y depende exclusivamente de las autoridades correspondientes.
-          </p>
-          <p>
             Esta plataforma tiene como objetivo facilitar la consulta y el análisis de los actos públicos, 
             pero no reemplaza al sistema oficial utilizado para la toma de cargos.
             Verifique siempre la información en la fuente oficial antes de tomar cualquier decisión.

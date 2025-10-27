@@ -1,9 +1,6 @@
 <template>
   <div class="acto-card">
     <div class="card-header">
-      <button class="expand-btn" @click="toggleExpanded">
-        {{ isExpanded ? '−' : '+' }}
-      </button>
       <h3 class="card-title">{{ acto.titulo }}</h3>
     </div>
 
@@ -45,7 +42,7 @@
       </div>
     </div>
 
-    <div v-if="isExpanded" class="card-details">
+    <div class="card-details">
       <div v-if="acto.horario" class="detail-row">
         <strong>Horario:</strong> {{ acto.horario }}
       </div>
@@ -59,15 +56,13 @@
 
     <div class="card-footer">
       <a :href="acto.link" target="_blank" class="link-detail">
-        Ver detalle →
+        Postular →
       </a>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
-
 export default {
   name: 'ActoPublicoCard',
   props: {
@@ -77,12 +72,6 @@ export default {
     }
   },
   setup() {
-    const isExpanded = ref(false)
-
-    const toggleExpanded = () => {
-      isExpanded.value = !isExpanded.value
-    }
-
     const getNivelClass = (nivel) => {
       return {
         'tag-inicial': nivel === 'INICIAL',
@@ -92,8 +81,6 @@ export default {
     }
 
     return {
-      isExpanded,
-      toggleExpanded,
       getNivelClass
     }
   }
@@ -118,33 +105,7 @@ export default {
 }
 
 .card-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
   margin-bottom: 12px;
-}
-
-.expand-btn {
-  background: linear-gradient(135deg, #a8e6cf 0%, #56c596 100%);
-  border: none;
-  border-radius: 8px;
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 1;
-  color: #fff;
-  padding: 0;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(86, 197, 150, 0.2);
-}
-
-.expand-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 12px rgba(86, 197, 150, 0.3);
 }
 
 .card-title {
@@ -152,7 +113,6 @@ export default {
   font-size: 18px;
   font-weight: 700;
   color: #1a4d2e;
-  flex: 1;
 }
 
 .card-tags {
