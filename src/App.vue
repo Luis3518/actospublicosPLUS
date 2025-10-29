@@ -78,6 +78,7 @@ import ActoPublicoCard from './components/ActoPublicoCard.vue'
 import FilterPanel from './components/FilterPanel.vue'
 import InfoBanner from './components/InfoBanner.vue'
 import ErrorBanner from './components/ErrorBanner.vue'
+import { useAnalytics } from './composables/useAnalytics.js'
 
 // Import all JSON files automatically and get the most recent one
 const jsonModules = import.meta.glob('../actos_publicos_*.json', { eager: true })
@@ -126,6 +127,9 @@ export default {
     ErrorBanner
   },
   setup() {
+    // Initialize analytics tracking (will auto-track page visit)
+    useAnalytics()
+
     // Check if there was an error loading the JSON
     const hasError = ref(!!loadError)
     const errorMessage = ref(loadError || '')

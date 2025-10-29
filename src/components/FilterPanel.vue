@@ -229,6 +229,8 @@
 </template>
 
 <script>
+import { useAnalytics } from '../composables/useAnalytics.js'
+
 export default {
   name: 'FilterPanel',
   props: {
@@ -267,6 +269,8 @@ export default {
   },
   emits: ['filter-change', 'clear-filters'],
   setup(props, { emit }) {
+    const { trackClearFilters } = useAnalytics()
+
     const handleChange = (filterType, value) => {
       emit('filter-change', filterType, value)
     }
@@ -276,6 +280,7 @@ export default {
     }
 
     const clearAll = () => {
+      trackClearFilters()
       emit('clear-filters')
     }
 
