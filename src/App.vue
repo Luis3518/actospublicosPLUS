@@ -9,11 +9,20 @@
         <div class="header-left">
           <div class="logo">Actos Públicos PLUS</div>
         </div>
+        <div class="header-right">
+          <button class="info-btn" @click="showInfoModal = true" title="Información del sistema">
+            <span class="info-icon">ℹ️</span>
+            <span class="info-text">Info</span>
+          </button>
+        </div>
       </div>
     </header>
 
     <!-- Info Banner -->
     <InfoBanner v-if="!hasError" :fecha="dataFecha" :hora="dataHora" />
+    
+    <!-- Info Modal -->
+    <InfoModal v-model="showInfoModal" :fecha="dataFecha" :hora="dataHora" />
 
     <div class="main-container">
       <!-- Main Content -->
@@ -89,6 +98,7 @@ import { ref, computed } from 'vue'
 import ActoPublicoCard from './components/ActoPublicoCard.vue'
 import FilterPanel from './components/FilterPanel.vue'
 import InfoBanner from './components/InfoBanner.vue'
+import InfoModal from './components/InfoModal.vue'
 import ErrorBanner from './components/ErrorBanner.vue'
 import { useAnalytics } from './composables/useAnalytics.js'
 
@@ -136,6 +146,7 @@ export default {
     ActoPublicoCard,
     FilterPanel,
     InfoBanner,
+    InfoModal,
     ErrorBanner
   },
   setup() {
@@ -162,6 +173,7 @@ export default {
     const actosPublicos = ref(hasError.value ? [] : actosData.actos_publicos)
     const currentPage = ref(1)
     const itemsPerPage = 4
+    const showInfoModal = ref(false)
     
     const filters = ref({
       area: '',
@@ -287,6 +299,7 @@ export default {
       filters,
       currentPage,
       totalPages,
+      showInfoModal,
       handleFilterChange,
       clearFilters,
       nextPage,
@@ -311,9 +324,60 @@ export default {
   backdrop-filter: blur(10px);
 }
 
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header-left {
+  flex: 1;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
 .logo {
   letter-spacing: 0.5px;
   text-shadow: 0 2px 4px rgba(58, 166, 118, 0.2);
+}
+
+.info-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: linear-gradient(135deg, #56c596 0%, #3aa676 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(58, 166, 118, 0.3);
+}
+
+.info-btn:hover {
+  background: linear-gradient(135deg, #3aa676 0%, #2d8c5d 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(58, 166, 118, 0.4);
+}
+
+.info-btn:active {
+  transform: translateY(0);
+}
+
+.info-btn .info-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.info-btn .info-text {
+  line-height: 1;
 }
 
 /* Mejoras para botones de paginación */
@@ -409,5 +473,22 @@ export default {
 
 .suggestion-btn:active {
   transform: translateY(0);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .info-btn .info-text {
+    display: none;
+  }
+
+  .info-btn {
+    padding: 0.625rem;
+    min-width: 2.5rem;
+    justify-content: center;
+  }
+
+  .info-btn .info-icon {
+    margin: 0;
+  }
 }
 </style>

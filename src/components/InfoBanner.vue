@@ -3,25 +3,14 @@
   <div class="modal-overlay" v-if="isVisible">
     <div class="info-banner">
       <div class="info-banner-content">
-        <div class="offline-notice">
-          <div class="offline-icon">⚠️</div>
-          <h2 class="offline-title">Temporalmente Fuera de Línea</h2>
-          <p class="offline-text">Este servicio se encuentra suspendido temporalmente y será reactivado en 2026</p>
-        </div>
-        <div class="info-icon">ℹ️</div>
-        <div class="info-text">
-          <h2 class="banner-title">Aviso Importante</h2>
-          <p>
-            Los cargos disponibles que se listan a continuación fueron obtenidos automáticamente el 
-            <strong>{{ fecha }}</strong> a las <strong>{{ hora }}</strong> desde el 
-            <a href="https://actopublico.bue.edu.ar/" target="_blank" rel="noopener noreferrer" class="official-link">sistema oficial de actos públicos</a>.
-          </p>
-          <p>
-            Esta plataforma tiene como objetivo facilitar la consulta y el análisis de los actos públicos, 
-            pero no reemplaza al sistema oficial utilizado para la toma de cargos.
-            Verifique siempre la información en la fuente oficial antes de tomar cualquier decisión.
-          </p>
-        </div>
+        <div class="offline-icon">ℹ️</div>
+        <h2 class="offline-title">Temporalmente Fuera de Línea</h2>
+        <p class="offline-text">
+          Este servicio se encuentra suspendido temporalmente y será reactivado en 2026.
+        </p>
+        <p class="offline-text demo-text">
+          Podés navegar los cargos del acto público del <strong>{{ fecha }}</strong> a modo de prueba.
+        </p>
         <button class="accept-btn" @click="closeBanner">Entendido</button>
       </div>
     </div>
@@ -95,14 +84,15 @@ export default {
 }
 
 .info-banner {
-  background: linear-gradient(135deg, #a8e6cf 0%, #56c596 50%, #3aa676 100%);
-  color: #1a4d2e;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e3ebf9 100%);
+  color: #2c3e50;
   padding: 2.5rem;
   border-radius: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  max-width: 700px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  max-width: 650px;
   width: 90%;
   animation: slideUp 0.4s ease-out;
+  border: 2px solid #cbd5e8;
 }
 
 .info-banner-content {
@@ -113,134 +103,57 @@ export default {
   text-align: center;
 }
 
-.offline-notice {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-  color: white;
-  padding: 1.5rem 2rem;
-  border-radius: 12px;
-  width: 100%;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  margin-bottom: 1rem;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  }
-  50% {
-    transform: scale(1.02);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
-  }
-}
-
 .offline-icon {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  animation: shake 3s ease-in-out infinite;
-}
-
-@keyframes shake {
-  0%, 100% {
-    transform: rotate(0deg);
-  }
-  10%, 30%, 50%, 70%, 90% {
-    transform: rotate(-5deg);
-  }
-  20%, 40%, 60%, 80% {
-    transform: rotate(5deg);
-  }
+  font-size: 3.5rem;
+  opacity: 0.8;
 }
 
 .offline-title {
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin: 0 0 0.5rem 0;
-  color: white;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  color: #34495e;
 }
 
 .offline-text {
-  font-size: 1.1rem;
-  margin: 0;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.95);
+  font-size: 1.05rem;
+  margin: 0 0 0.75rem 0;
+  font-weight: 500;
+  color: #5a6c7d;
+  line-height: 1.6;
 }
 
-.info-icon {
-  font-size: 3.5rem;
-  flex-shrink: 0;
-  animation: bounce 1s ease-in-out infinite;
+.demo-text {
+  background: rgba(86, 197, 150, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border-left: 3px solid #56c596;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.banner-title {
-  font-size: 1.8rem;
+.demo-text strong {
+  color: #3aa676;
   font-weight: 700;
-  margin: 0 0 1rem 0;
-  color: #1a4d2e;
-}
-
-.info-text {
-  width: 100%;
-}
-
-.info-text p {
-  margin: 0 0 1rem 0;
-  line-height: 1.7;
-  font-size: 1rem;
-  text-align: left;
-}
-
-.info-text p:last-child {
-  margin-bottom: 0;
-}
-
-.info-text strong {
-  font-weight: 700;
-  color: #0d3d29;
-}
-
-.official-link {
-  color: #0d3d29;
-  font-weight: 600;
-  text-decoration: underline;
-  transition: all 0.3s ease;
-}
-
-.official-link:hover {
-  color: #1a5f42;
-  text-decoration: none;
 }
 
 .accept-btn {
-  background: white;
-  color: #2d7a5b;
+  background: linear-gradient(135deg, #56c596 0%, #3aa676 100%);
+  color: white;
   border: none;
   padding: 0.875rem 3rem;
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.05rem;
+  font-weight: 600;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-  margin-top: 1rem;
+  box-shadow: 0 3px 12px rgba(58, 166, 118, 0.25);
 }
 
 .accept-btn:hover {
-  background: #1a4d2e;
-  color: white;
+  background: linear-gradient(135deg, #3aa676 0%, #2d8c5d 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 5px 18px rgba(58, 166, 118, 0.35);
 }
 
 .accept-btn:active {
@@ -253,12 +166,8 @@ export default {
     width: 95%;
   }
 
-  .offline-notice {
-    padding: 1.25rem 1.5rem;
-  }
-
   .offline-icon {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .offline-title {
@@ -269,21 +178,14 @@ export default {
     font-size: 0.95rem;
   }
 
-  .banner-title {
-    font-size: 1.5rem;
-  }
-
-  .info-icon {
-    font-size: 2.5rem;
-  }
-
-  .info-text p {
-    font-size: 0.95rem;
+  .demo-text {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9rem;
   }
 
   .accept-btn {
     padding: 0.75rem 2.5rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 }
 </style>
