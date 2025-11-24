@@ -60,18 +60,6 @@
             Siguiente
           </button>
         </div>
-
-        <!-- Suggestion Button -->
-        <div class="suggestion-container">
-          <a 
-            href="https://forms.gle/iTJHHEhzy8LfoXWj9" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="suggestion-btn"
-          >
-            📝 Enviar sugerencias
-          </a>
-        </div>
       </main>
 
       <!-- Filter Panel -->
@@ -440,39 +428,6 @@ export default {
 
 .filter-panel {
   animation: fadeInUp 1s ease-out;
-}
-
-/* Suggestion Button Styles */
-.suggestion-container {
-  margin-top: 2rem;
-  display: flex;
-  justify-content: center;
-  padding-bottom: 1rem;
-}
-
-.suggestion-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #56c596 0%, #3aa676 100%);
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  box-shadow: 0 2px 8px rgba(58, 166, 118, 0.2);
-  transition: all 0.3s ease;
-}
-
-.suggestion-btn:hover {
-  background: linear-gradient(135deg, #3aa676 0%, #2d8c5d 100%);
-  box-shadow: 0 4px 12px rgba(58, 166, 118, 0.3);
-  transform: translateY(-2px);
-}
-
-.suggestion-btn:active {
-  transform: translateY(0);
 }
 
 /* Responsive styles */

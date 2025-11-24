@@ -25,6 +25,21 @@
               Verifique siempre la información en la fuente oficial antes de tomar cualquier decisión.
             </p>
           </div>
+          <div class="info-section suggestion-section">
+            <h3 class="section-title">💬 ¿Tienes sugerencias?</h3>
+            <p>
+              Tu opinión nos ayuda a mejorar esta plataforma. Si tienes ideas, comentarios o 
+              encontraste algún problema, nos encantaría escucharte.
+            </p>
+            <a 
+              href="https://forms.gle/iTJHHEhzy8LfoXWj9" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="suggestion-link"
+            >
+              📝 Enviar sugerencias
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -236,6 +251,37 @@ export default {
 .official-link:hover {
   color: #1a5f42;
   text-decoration: none;
+}
+
+.suggestion-section {
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.suggestion-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(26, 77, 46, 0.9);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 0.75rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.suggestion-link:hover {
+  background: rgba(13, 61, 41, 1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.suggestion-link:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 768px) {
