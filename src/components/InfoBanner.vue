@@ -3,6 +3,11 @@
   <div class="modal-overlay" v-if="isVisible">
     <div class="info-banner">
       <div class="info-banner-content">
+        <div class="offline-notice">
+          <div class="offline-icon">⚠️</div>
+          <h2 class="offline-title">Temporalmente Fuera de Línea</h2>
+          <p class="offline-text">Este servicio se encuentra suspendido temporalmente y será reactivado en 2026</p>
+        </div>
         <div class="info-icon">ℹ️</div>
         <div class="info-text">
           <h2 class="banner-title">Aviso Importante</h2>
@@ -108,6 +113,61 @@ export default {
   text-align: center;
 }
 
+.offline-notice {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+  color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  width: 100%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  margin-bottom: 1rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+  }
+}
+
+.offline-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  animation: shake 3s ease-in-out infinite;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: rotate(-5deg);
+  }
+  20%, 40%, 60%, 80% {
+    transform: rotate(5deg);
+  }
+}
+
+.offline-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.offline-text {
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+}
+
 .info-icon {
   font-size: 3.5rem;
   flex-shrink: 0;
@@ -191,6 +251,22 @@ export default {
   .info-banner {
     padding: 2rem 1.5rem;
     width: 95%;
+  }
+
+  .offline-notice {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .offline-icon {
+    font-size: 2rem;
+  }
+
+  .offline-title {
+    font-size: 1.4rem;
+  }
+
+  .offline-text {
+    font-size: 0.95rem;
   }
 
   .banner-title {
